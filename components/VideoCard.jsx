@@ -1,4 +1,4 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { icons } from "../constants";
 
@@ -10,9 +10,7 @@ const VideoCard = ({
     creator: { username, avatar },
   },
 }) => {
-
-  const [play, setPlay] = useState(false)
-
+  const [play, setPlay] = useState(false);
 
   return (
     <View className="flex-col items-center px-4 mb-14">
@@ -40,15 +38,30 @@ const VideoCard = ({
           </View>
         </View>
         <View className="pt-2">
-          <Image 
-            source={icons.menu}
-            className="w-5 h-5"
-            resizeMode="contain"
-          />
+          <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" />
         </View>
       </View>
 
-
+      {play ? (
+        <Text className="text-white">Playing</Text>
+      ) : (
+        <TouchableOpacity
+          className="w-full h-60 rounded-xl mt-3 justify-center items-center relative"
+          activeOpacity={0.7}
+          onPress={() => setPlay(true)}
+        >
+          <Image
+            source={{ uri: thumbnail }}
+            className="w-full h-full rounded-xl mt-3"
+            resizeMode="contain"
+          />
+          <Image
+            source={icons.play}
+            className="w-12 h-12 absolute"
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
