@@ -17,20 +17,11 @@ const Search = () => {
 
   return (
     <SafeAreaView className="bg-primary h-full">
-    <FlatList
-      data={posts}
-      keyExtractor={(item) => item.$id}
-      renderItem={({ item }) => (
-        <VideoCard
-          title={item.title}
-          thumbnail={item.thumbnail}
-          video={item.video}
-          creator={item.creator.username}
-          avatar={item.creator.avatar}
-        />
-      )}
-      ListHeaderComponent={() => (
-        <>
+      <FlatList
+        data={posts}
+        keyExtractor={(item) => item.$id}
+        renderItem={({ item }) => <VideoCard video={item} />}
+        ListHeaderComponent={() => (
           <View className="flex my-6 px-4">
             <Text className="font-pmedium text-gray-100 text-sm">
               Search Results
@@ -43,16 +34,15 @@ const Search = () => {
               <SearchInput initialQuery={query} refetch={refetch} />
             </View>
           </View>
-        </>
-      )}
-      ListEmptyComponent={() => (
-        <EmptyState
-          title="No Videos Found"
-          subtitle="No videos found for this search query"
-        />
-      )}
-    />
-  </SafeAreaView>
+        )}
+        ListEmptyComponent={() => (
+          <EmptyState
+            title="No Videos Found"
+            subtitle="No videos found for this search query"
+          />
+        )}
+      />
+    </SafeAreaView>
   );
 };
 
