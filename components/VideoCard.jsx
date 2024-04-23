@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, Alert } from "react-native";
 import React, { useState } from "react";
 import { icons } from "../constants";
 import { ResizeMode, Video } from "expo-av";
@@ -52,6 +52,11 @@ const VideoCard = ({
         shouldPlay
         onPlaybackStatusUpdate={(status) => {
           if (status.didJustFinish) {
+            setPlay(false);
+          }
+
+          if (status.error) {
+            Alert.alert("Video unavailable please try again later.");
             setPlay(false);
           }
         }}

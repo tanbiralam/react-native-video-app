@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ResizeMode, Video } from "expo-av";
 import * as Animatable from "react-native-animatable";
 import {
+  Alert,
   FlatList,
   Image,
   ImageBackground,
@@ -46,6 +47,11 @@ const TrendingItem = ({ activeItem, item }) => {
           shouldPlay
           onPlaybackStatusUpdate={(status) => {
             if (status.didJustFinish) {
+              setPlay(false);
+            }
+
+            if (status.error) {
+              Alert.alert("Video unavailable please try again later.");
               setPlay(false);
             }
           }}
